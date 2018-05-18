@@ -18,8 +18,11 @@ public class ArrayUtil {
      * @return
      */
     public String[] concat(String[] a, String[] b) {
-        if (a == null || b == null) {
-            return new String[0];
+        if(a == null){
+            a = new String[0];
+        }
+        if(b == null){
+            b = new String[0];
         }
 
         String[] c = new String[a.length + b.length];

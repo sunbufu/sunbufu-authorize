@@ -48,11 +48,11 @@ public class AccessInterceptor implements HandlerInterceptor {
             String[] access = arrayUtil.concat(controllerAccess == null ? null : controllerAccess.value(), methodAccess == null ? null : methodAccess.value());
             log.debug("access = [{}]", access);
             //不需要权限
-            if (methodAccess == null || methodAccess.value() == null || methodAccess.value().length <= 0) {
+            if (access == null || access.length <= 0) {
                 return true;
             }
             //权限认证
-            if (!authorizeService.authorize(methodAccess.value(), request.getSession())) {
+            if (!authorizeService.authorize(access, request.getSession())) {
                 //权限认证失败处理
                 authorizeService.authorizeFail(request, response);
             } else {
