@@ -30,7 +30,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.authorize</groupId>
+            <groupId>com.github.sunbufu</groupId>
             <artifactId>authorize-starter</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
