@@ -2,15 +2,8 @@ package com.sunbufu.authorize.authorizestarter;
 
 import com.sunbufu.authorize.authorizecore.intercept.AccessInterceptor;
 import com.sunbufu.authorize.authorizecore.service.IAuthorizeService;
+import com.sunbufu.authorize.authorizecore.util.ArrayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -21,15 +14,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author sunbufu
  */
 @Configuration
-@ConditionalOnClass({AccessInterceptor.class})
 public class AuthorizeAutoConfiguration implements WebMvcConfigurer {
 
     @Autowired
-    private AccessInterceptor accessInterceptor;
+    private IAuthorizeService authorizeService;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(accessInterceptor);
+        registry.addInterceptor(accessInterceptor());
+    }
+
+    public ArrayUtil arrayUtil() {
+        return new ArrayUtil();
+    }
+
+    public AccessInterceptor accessInterceptor() {
+        return new AccessInterceptor(authorizeService, arrayUtil());
     }
 
 }

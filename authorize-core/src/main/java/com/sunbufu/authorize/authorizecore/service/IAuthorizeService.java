@@ -1,5 +1,6 @@
 package com.sunbufu.authorize.authorizecore.service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -22,8 +23,18 @@ public interface IAuthorizeService {
     /**
      * 鉴权失败时调用
      *
+     * @param request
      * @param response
      */
-    void authorizeFail(HttpServletResponse response);
+    default void authorizeSuccess(HttpServletRequest request, HttpServletResponse response) {
+    }
+
+    /**
+     * 鉴权失败时调用
+     *
+     * @param request
+     * @param response
+     */
+    void authorizeFail(HttpServletRequest request, HttpServletResponse response);
 
 }

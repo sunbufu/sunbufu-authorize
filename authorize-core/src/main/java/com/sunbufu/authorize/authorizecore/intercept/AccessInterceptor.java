@@ -1,6 +1,6 @@
 package com.sunbufu.authorize.authorizecore.intercept;
 
-import com.sunbufu.authorize.authorizecore.ArrayUtil;
+import com.sunbufu.authorize.authorizecore.util.ArrayUtil;
 import com.sunbufu.authorize.authorizecore.annotation.Access;
 import com.sunbufu.authorize.authorizecore.service.IAuthorizeService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,14 +18,16 @@ import javax.servlet.http.HttpServletResponse;
  * @author sunbufu
  */
 @Slf4j
-@Component
 public class AccessInterceptor implements HandlerInterceptor {
 
-    @Autowired
     private IAuthorizeService authorizeService;
 
-    @Autowired
     private ArrayUtil arrayUtil;
+
+    public AccessInterceptor(IAuthorizeService authorizeService, ArrayUtil arrayUtil) {
+        this.authorizeService = authorizeService;
+        this.arrayUtil = arrayUtil;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -52,7 +54,9 @@ public class AccessInterceptor implements HandlerInterceptor {
             //权限认证
             if (!authorizeService.authorize(methodAccess.value(), request.getSession())) {
                 //权限认证失败处理
-                authorizeService.authorizeFail(response);
+                authorizeService.authorizeFail(request, response);
+            } else {
+                authorizeService.authorizeSuccess(request, response);
             }
         } else {
             log.debug("handler = [{}]", handler);

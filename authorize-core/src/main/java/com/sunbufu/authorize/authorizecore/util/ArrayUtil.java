@@ -1,4 +1,4 @@
-package com.sunbufu.authorize.authorizecore;
+package com.sunbufu.authorize.authorizecore.util;
 
 import org.springframework.stereotype.Component;
 
