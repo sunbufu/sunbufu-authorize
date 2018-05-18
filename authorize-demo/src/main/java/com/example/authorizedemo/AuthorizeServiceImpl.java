@@ -33,7 +33,7 @@ public class AuthorizeServiceImpl implements IAuthorizeService {
         Set<String> access;
     }
 
-    //模拟数据库中的用户信息
+    /**模拟数据库中的用户信息*/
     private Map<String, User> users;
 
     @PostConstruct
