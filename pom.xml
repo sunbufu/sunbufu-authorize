@@ -12,7 +12,6 @@
     <modules>
         <module>authorize-core</module>
         <module>authorize-starter</module>
-        <module>demo</module>
     </modules>
 
     <properties>
