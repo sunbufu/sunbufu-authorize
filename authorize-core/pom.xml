@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>com.sunbufu.authorize</groupId>
+        <groupId>com.github.authorize</groupId>
         <artifactId>authorize</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
