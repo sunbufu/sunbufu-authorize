@@ -6,8 +6,41 @@
 
     <groupId>com.github.sunbufu</groupId>
     <artifactId>authorize</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <name>sunbufu.authorize</name>
+    <url>https://github.com/sunbufu/sunbufu-authorize</url>
+    <description>a authorize frameWork base on annotation</description>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>sunbufu</name>
+            <email>sunyoubufu@qq.com</email>
+            <url>https://github.com/sunbufu/sunbufu-authorize</url>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/sunbufu/sunbufu-authorize</url>
+        <connection>https://github.com/sunbufu/sunbufu-authorize.git</connection>
+        <developerConnection>https://github.com/sunbufu/sunbufu-authorize</developerConnection>
+        <tag>v${project.version}</tag>
+    </scm>
 
     <modules>
         <module>authorize-core</module>
@@ -17,9 +50,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
         <spring.boot.version>2.0.1.RELEASE</spring.boot.version>
         <lombok.version>1.16.20</lombok.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencyManagement>
@@ -35,5 +68,86 @@
         </dependencies>
     </dependencyManagement>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <name>Maven Central Staging Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--指定编译器版本-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <!--打包源码-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--打包文档注释-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.3</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--gpg加密-->
+                <!--<plugin>-->
+                    <!--<groupId>org.apache.maven.plugins</groupId>-->
+                    <!--<artifactId>maven-gpg-plugin</artifactId>-->
+                    <!--<version>1.6</version>-->
+                    <!--<executions>-->
+                        <!--<execution>-->
+                            <!--<id>sign-artifacts</id>-->
+                            <!--<phase>verify</phase>-->
+                            <!--<goals>-->
+                                <!--<goal>sign</goal>-->
+                            <!--</goals>-->
+                        <!--</execution>-->
+                    <!--</executions>-->
+                <!--</plugin>-->
+                <!--指定上传仓库-->
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.3</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
