@@ -7,7 +7,9 @@
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![](https://img.shields.io/badge/author-sunbufu-blue.svg)](https://blog.csdn.net/sunbufu)
 
-注解式权限认证
+注解式权限管理框架
+
+[详细说明](https://blog.csdn.net/sunbufu/article/details/80379844)
 
 ## 1 how to use
 

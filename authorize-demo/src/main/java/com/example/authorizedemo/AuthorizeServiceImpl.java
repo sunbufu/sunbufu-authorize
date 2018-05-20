@@ -23,7 +23,7 @@ import java.util.Set;
 @Service
 public class AuthorizeServiceImpl implements IAuthorizeService {
 
-    public static final String USER_SESSION_KEY = "USER";
+    private static final String USER_SESSION_KEY = "USER";
 
     @Data
     @AllArgsConstructor
@@ -37,7 +37,7 @@ public class AuthorizeServiceImpl implements IAuthorizeService {
     private Map<String, User> users;
 
     @PostConstruct
-    public void setUsers() {
+    public void initUsers() {
         users = new HashMap<>();
         Set<String> access = new HashSet<>();
         access.add("manager");
